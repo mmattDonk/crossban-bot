@@ -11,6 +11,7 @@ with open("config.json") as config_file:
 
 dotenv.load_dotenv()
 
+import datetime
 
 class Bot(commands.Bot):
     def __init__(self):
@@ -30,7 +31,10 @@ class Bot(commands.Bot):
             + " - "
             + message.content
         )
-        
+        if config["logmode"]:
+            f = open(f"logs/log_{datetime.date.today()}.txt", "a")
+            f.write("\n" + message.author.name + " - " + message.content + " [" + message.channel.name + "]")
+            f.close()   
 
     async def event_ready(self):
         print(f"Twitch Bot Ready | {self.nick}")
