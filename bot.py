@@ -23,13 +23,14 @@ class Bot(commands.Bot):
         )
 
     async def event_message(self, message):
+        await self.handle_commands(message)
         print(
             f"[MESSAGE LOGS] ({message.channel.name}) "
             + message.author.name
             + " - "
             + message.content
         )
-        await self.handle_commands(message)
+        
 
     async def event_ready(self):
         print(f"Twitch Bot Ready | {self.nick}")
@@ -39,16 +40,16 @@ class Bot(commands.Bot):
         await ctx.send(f"FeelsDankMan 🔔 ding @{ctx.author.name}")
 
     @commands.command(name="crossban", aliases=["xban"])
-    async def crossban_command(self, ctx, user: str):
+    async def crossban_command(self, ctx, user: str, *, reason: str):
         if ctx.author.name in config["ownernames"]:
             for channelname in self.initial_channels:
                 channel = self.get_channel(channelname)
-                await channel.ban(user, reason=f"Crossbanned, originated from {ctx.channel.name}")
+                await channel.ban(user, reason=f"Crossbanned, originated from {ctx.channel.name}. Reason: {reason}")
             
             await ctx.send("Crossban finished :)")
 
     @commands.command(name="undoban", aliases=["xunban"])
-    async def crossban_command(self, ctx, user: str):
+    async def undocrossban_command(self, ctx, user: str):
         if ctx.author.name in config["ownernames"]:
             for channelname in self.initial_channels:
                 channel = self.get_channel(channelname)
