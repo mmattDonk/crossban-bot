@@ -1,6 +1,8 @@
 ## crossban bot
 
-edit config.json
+edit config_example.json
+
+change config_example.json to `config.json`
 
 fill .env with:
 ```env

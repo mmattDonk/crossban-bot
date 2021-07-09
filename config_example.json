@@ -1,0 +1,7 @@
+{
+    "nickname" : "botusername",
+    "prefix" : "!",
+    "channels" : ["channelname1", "channelname2"],
+    "ownernames" : ["yourname"],
+    "logmode" : true
+}
