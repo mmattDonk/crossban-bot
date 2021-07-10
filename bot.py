@@ -33,7 +33,7 @@ class Bot(commands.Bot):
         )
         if config["logmode"]:
             f = open(f"logs/log_{datetime.date.today()}.txt", "a")
-            f.write("\n" + message.author.name + " - " + message.content + " [" + message.channel.name + "]")
+            f.write("\n" + message.author.name + " - " + message.content + " [" + message.channel.name + "] " + str(datetime.datetime.utcnow()))
             f.close()   
 
     async def event_ready(self):
