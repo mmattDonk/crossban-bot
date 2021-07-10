@@ -41,7 +41,10 @@ class Bot(commands.Bot):
 
     @commands.command(name="ping", aliases=["ding"])    
     async def test_command(self, ctx):
-        await ctx.send(f"FeelsDankMan 🔔 ding @{ctx.author.name}")
+        if config["logmode"]:
+            await ctx.send(f"FeelsDankMan 🔔 crossban+log bot online. @{ctx.author.name}")
+        else:
+            await ctx.send(f"FeelsDankMan 🔔 crossban bot online. @{ctx.author.name}")
 
     @commands.command(name="crossban", aliases=["xban"])
     async def crossban_command(self, ctx, user: str, *, reason: str):
