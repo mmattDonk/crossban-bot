@@ -1,3 +1,4 @@
+import asyncio
 from twitchio.ext import commands
 
 import os
@@ -63,6 +64,28 @@ class Bot(commands.Bot):
                 await channel.unban(user)
             
             await ctx.send("Undoban finished :)")
+    
+    @commands.command(name="masscrossban", aliases=["massxban", "mxban"])
+    async def masscrossban_comamdn(self, ctx, users: str, *, reason: str):
+        if ctx.author.name in config["ownernames"]:
+            users2 = users.split(",")
+            for channelname in self.initial_channels:
+                for user in users2:
+                    await asyncio.sleep(1)
+                    channel = self.get_channel(channelname)
+                    await channel.ban(user, reason=f"Crossbanned, originated from {ctx.channel.name}. Reason: {reason}")
+            await ctx.send("Massban finished :)")
+
+    @commands.command(name="masscrossunban", aliases=["massxunban", "mxuban"])
+    async def masscrossunban_comamdn(self, ctx, users: str):
+        if ctx.author.name in config["ownernames"]:
+            users2 = users.split(",")
+            for channelname in self.initial_channels:
+                for user in users2:
+                    await asyncio.sleep(1)
+                    channel = self.get_channel(channelname)
+                    await channel.unban(user)
+            await ctx.send("Massunban finished :)")
 
 bot = Bot()
 bot.run()
