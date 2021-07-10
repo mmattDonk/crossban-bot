@@ -9,6 +9,11 @@ Lets you ban 1 person across multiple chats.
 * Corssbanning multiple people, across multiple Twitch chats.
 * Crossunbanning
 
+## Prerequisites
+1. Python
+    - Windows: https://www.python.org/downloads/
+    - MacOS: https://www.python.org/downloads/
+        - MacOS Brew: `brew install python3` & `brew install pip3`
 
 ## Setup
 
