@@ -4,4 +4,4 @@
 python_dotenv == 0.18.0
 
 # C:\Users\notmm\crossban\bot.py: 1
-twitchio == 1.2.3
+twitchio == 2.0.2
