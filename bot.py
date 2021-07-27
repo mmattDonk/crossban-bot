@@ -17,7 +17,7 @@ import datetime
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(
-            irc_token=os.environ.get("TOKEN"),
+            token=os.environ.get("TOKEN"),
             client_id=os.environ.get("client_id"),
             nick=config["nickname"],
             prefix=config["prefix"],
