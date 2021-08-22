@@ -14,6 +14,7 @@ dotenv.load_dotenv()
 
 import datetime
 
+
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(
@@ -31,15 +32,26 @@ class Bot(commands.Bot):
 
         if config["logmode"]:
             with open(f"logs/log_{datetime.date.today()}.txt", "a") as f:
-                f.write("\n" + message.author.name + " - " + message.content + " [" + message.channel.name + "] " + str(datetime.datetime.utcnow()))   
+                f.write(
+                    "\n"
+                    + message.author.name
+                    + " - "
+                    + message.content
+                    + " ["
+                    + message.channel.name
+                    + "] "
+                    + str(datetime.datetime.utcnow())
+                )
 
     async def event_ready(self):
         print(f"Twitch Bot Ready | {self.nick}")
 
-    @commands.command(name="ping", aliases=["ding"])    
+    @commands.command(name="ping", aliases=["ding"])
     async def test_command(self, ctx):
         if config["logmode"]:
-            await ctx.send(f"FeelsDankMan 🔔 crossban+log bot online. @{ctx.author.name}")
+            await ctx.send(
+                f"FeelsDankMan 🔔 crossban+log bot online. @{ctx.author.name}"
+            )
         else:
             await ctx.send(f"FeelsDankMan 🔔 crossban bot online. @{ctx.author.name}")
 
@@ -48,8 +60,10 @@ class Bot(commands.Bot):
         if ctx.author.name in config["ownernames"]:
             for channelname in self.initial_channels:
                 channel = self.get_channel(channelname)
-                await channel.send(f".ban {user} Crossbanned, originated from {ctx.channel.name}. Reason: {reason}")
-            
+                await channel.send(
+                    f".ban {user} Crossbanned, originated from {ctx.channel.name}. Reason: {reason}"
+                )
+
             await ctx.send("Crossban finished :)")
 
     @commands.command(name="undoban", aliases=["xunban"])
@@ -58,9 +72,9 @@ class Bot(commands.Bot):
             for channelname in self.initial_channels:
                 channel = self.get_channel(channelname)
                 await channel.send(f".unban {user}")
-            
+
             await ctx.send("Undoban finished :)")
-    
+
     @commands.command(name="masscrossban", aliases=["massxban", "mxban"])
     async def masscrossban_comamdn(self, ctx, users: str, *, reason: str):
         if ctx.author.name in config["ownernames"]:
@@ -69,7 +83,9 @@ class Bot(commands.Bot):
                 for user in users2:
                     await asyncio.sleep(0.5)
                     channel = self.get_channel(channelname)
-                    await channel.send(f".ban {user} Crossbanned, originated from {ctx.channel.name}. Reason: {reason}")
+                    await channel.send(
+                        f".ban {user} Crossbanned, originated from {ctx.channel.name}. Reason: {reason}"
+                    )
             await ctx.send("Massban finished :)")
 
     @commands.command(name="masscrossunban", aliases=["massxunban", "mxuban"])
@@ -82,6 +98,7 @@ class Bot(commands.Bot):
                     channel = self.get_channel(channelname)
                     await channel.send(f".unban {user}")
             await ctx.send("Massunban finished :)")
+
 
 bot = Bot()
 bot.run()
