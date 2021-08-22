@@ -34,11 +34,13 @@ client_id=twitchdevconsoleclientid
 
 5. Start bot `python3 bot.py`
 
-## commands
-!crossban username reason
+## Commands
+### All commands that are bolded, are `OWNER ONLY` (which means only the bot owners can use them)
 
-!undoban username
+**!crossban {username} {reason}**
 
-!masscrossban username,username1,username2,username3 reason
+**!undoban {username}**
 
-!masscrossunban username,username1,username2,username3
+**!masscrossban {username},{username1},{username2},{username3} {reason}**
+
+**!masscrossunban {username},{username1},{username2},{username3}**
