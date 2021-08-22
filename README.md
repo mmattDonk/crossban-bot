@@ -48,3 +48,6 @@ Note: You won't be able to see logs.)
 **!masscrossban {username},{username1},{username2},{username3} {reason}**
 
 **!masscrossunban {username},{username1},{username2},{username3}**
+
+
+### `🙌` Code Contributors
