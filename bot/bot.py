@@ -103,7 +103,7 @@ class Bot(commands.Bot):
     @commands.command(name="massfileban")
     async def masscrossban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
-            data = urlopen(url).read().strip()
+            data = urlopen(url).read().decode('utf-8')
             users = data.split("\n")
 
             for channelname in self.initial_channels:
@@ -122,7 +122,7 @@ class Bot(commands.Bot):
     @commands.command(name="massfileunban")
     async def masscrossunban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
-            data = urlopen(url).read().strip()
+            data = urlopen(url).read().decode('utf-8')
             users = data.split("\n")
 
             for channelname in self.initial_channels:
