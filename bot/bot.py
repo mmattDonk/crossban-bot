@@ -3,8 +3,6 @@ from twitchio.ext import commands
 
 import os
 
-from ratelimit import limits
-
 import dotenv
 
 import json
@@ -79,7 +77,6 @@ class Bot(commands.Bot):
             await ctx.send("Undoban finished :)")
 
     @commands.command(name="masscrossban", aliases=["massxban", "mxban"])
-    @limits(calls=3, period=1)
     async def masscrossban_comamdn(self, ctx, users: str, *, reason: str):
         if ctx.author.name in config["ownernames"]:
             users2 = users.split(",")
@@ -93,7 +90,6 @@ class Bot(commands.Bot):
             await ctx.send("Massban finished :)")
 
     @commands.command(name="masscrossunban", aliases=["massxunban", "mxuban"])
-    @limits(calls=3, period=1)
     async def masscrossunban_comamdn(self, ctx, users: str):
         if ctx.author.name in config["ownernames"]:
             users2 = users.split(",")
@@ -105,7 +101,6 @@ class Bot(commands.Bot):
             await ctx.send("Massunban finished :)")
 
     @commands.command(name="massfileban")
-    @limits(calls=3, period=1)
     async def masscrossban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
             data = urlopen(url).read().decode("UTF-8")
@@ -128,7 +123,6 @@ class Bot(commands.Bot):
             await ctx.send("You are not allowed to do that.")
 
     @commands.command(name="massfileunban")
-    @limits(calls=3, period=1)
     async def masscrossunban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
             data = urlopen(url).read().decode("UTF-8")
