@@ -80,8 +80,8 @@ class Bot(commands.Bot):
     async def masscrossban_comamdn(self, ctx, users: str, *, reason: str):
         if ctx.author.name in config["ownernames"]:
             users2 = users.split(",")
-            for channelname in self.initial_channels:
-                for user in users2:
+            for user in users2:
+                for channelname in self.initial_channels:
                     await asyncio.sleep(0.5)
                     channel = self.get_channel(channelname)
                     await channel.send(
@@ -93,8 +93,8 @@ class Bot(commands.Bot):
     async def masscrossunban_comamdn(self, ctx, users: str):
         if ctx.author.name in config["ownernames"]:
             users2 = users.split(",")
-            for channelname in self.initial_channels:
-                for user in users2:
+            for user in users2:
+                for channelname in self.initial_channels:
                     await asyncio.sleep(1)
                     channel = self.get_channel(channelname)
                     await channel.send(f".unban {user}")
@@ -103,11 +103,13 @@ class Bot(commands.Bot):
     @commands.command(name="massfileban")
     async def masscrossban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
-            data = urlopen(url).read().decode("utf-8")
+            data = urlopen(url).read().decode("UTF-8")
             users = data.split("\n")
+            #print("UserList " + str(users))
 
-            for channelname in self.initial_channels:
-                for user in users:
+            for user in users:
+                user = user.strip("\r")
+                for channelname in self.initial_channels:
                     await asyncio.sleep(2)
                     channel = self.get_channel(channelname)
                     await channel.send(
@@ -123,11 +125,13 @@ class Bot(commands.Bot):
     @commands.command(name="massfileunban")
     async def masscrossunban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
-            data = urlopen(url).read().decode("utf-8")
+            data = urlopen(url).read().decode("UTF-8")
             users = data.split("\n")
+            #print("UserList " + str(users))
 
-            for channelname in self.initial_channels:
-                for user in users:
+            for user in users:
+                user = user.strip("\r")
+                for channelname in self.initial_channels:
                     await asyncio.sleep(2)
                     channel = self.get_channel(channelname)
                     await channel.send(f".unban {user}")
