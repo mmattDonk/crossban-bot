@@ -3,6 +3,8 @@ from twitchio.ext import commands
 
 import os
 
+from ratelimit import limits
+
 import dotenv
 
 import json
@@ -76,6 +78,7 @@ class Bot(commands.Bot):
 
             await ctx.send("Undoban finished :)")
 
+    @limits(calls=3, period=1)
     @commands.command(name="masscrossban", aliases=["massxban", "mxban"])
     async def masscrossban_comamdn(self, ctx, users: str, *, reason: str):
         if ctx.author.name in config["ownernames"]:
@@ -89,6 +92,7 @@ class Bot(commands.Bot):
                     )
             await ctx.send("Massban finished :)")
 
+    @limits(calls=3, period=1)
     @commands.command(name="masscrossunban", aliases=["massxunban", "mxuban"])
     async def masscrossunban_comamdn(self, ctx, users: str):
         if ctx.author.name in config["ownernames"]:
@@ -100,6 +104,7 @@ class Bot(commands.Bot):
                     await channel.send(f".unban {user}")
             await ctx.send("Massunban finished :)")
 
+    @limits(calls=3, period=1)
     @commands.command(name="massfileban")
     async def masscrossban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
@@ -122,6 +127,7 @@ class Bot(commands.Bot):
         else:
             await ctx.send("You are not allowed to do that.")
 
+    @limits(calls=3, period=1)
     @commands.command(name="massfileunban")
     async def masscrossunban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
