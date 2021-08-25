@@ -113,6 +113,7 @@ class Bot(commands.Bot):
                     await channel.send(
                         f".ban {user} Crossbanned, originated from {ctx.channel.name}."
                     )
+                    print(user)
 
             await ctx.send("Massban finished :)")
 
@@ -130,6 +131,7 @@ class Bot(commands.Bot):
                     await asyncio.sleep(2)
                     channel = self.get_channel(channelname)
                     await channel.send(f".unban {user}")
+                    print(user)
 
             await ctx.send("Massunban finished :)")
 
