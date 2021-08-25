@@ -122,7 +122,6 @@ class Bot(commands.Bot):
                     except:
                         await asyncio.sleep(30)
 
-
             await ctx.send("Massban finished :)")
 
         else:
