@@ -107,15 +107,20 @@ class Bot(commands.Bot):
             users = data.split("\n")
             # print("UserList " + str(users))
 
+            times = 0
             for user in users:
                 user = user.strip("\r")
                 for channelname in self.initial_channels:
-                    await asyncio.sleep(0.3)
+                    if times == 3:
+                        await asyncio.sleep(1)
+                        times = 0
+                        continue
                     channel = self.get_channel(channelname)
                     await channel.send(
                         f".ban {user} Crossbanned, originated from {ctx.channel.name}."
                     )
                     print(user)
+                times += 1
 
             await ctx.send("Massban finished :)")
 
