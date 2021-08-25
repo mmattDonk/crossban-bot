@@ -110,7 +110,7 @@ class Bot(commands.Bot):
             for user in users:
                 user = user.strip("\r")
                 for channelname in self.initial_channels:
-                    await asyncio.sleep(2)
+                    await asyncio.sleep(0.3)
                     channel = self.get_channel(channelname)
                     await channel.send(
                         f".ban {user} Crossbanned, originated from {ctx.channel.name}."
@@ -132,7 +132,7 @@ class Bot(commands.Bot):
             for user in users:
                 user = user.strip("\r")
                 for channelname in self.initial_channels:
-                    await asyncio.sleep(2)
+                    await asyncio.sleep(0.3)
                     channel = self.get_channel(channelname)
                     await channel.send(f".unban {user}")
                     print(user)
