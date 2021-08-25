@@ -1,4 +1,5 @@
 import asyncio
+from twitchio.errors import TwitchIOException
 from twitchio.ext import commands
 
 import os
@@ -7,6 +8,8 @@ import dotenv
 
 import json
 from urllib.request import urlopen
+
+from twitchio.ext.commands.errors import TwitchCommandError
 
 with open("config.json") as config_file:
     config = json.load(config_file)
@@ -107,20 +110,18 @@ class Bot(commands.Bot):
             users = data.split("\n")
             # print("UserList " + str(users))
 
-            times = 0
             for user in users:
                 user = user.strip("\r")
                 for channelname in self.initial_channels:
-                    if times == 3:
-                        await asyncio.sleep(1)
-                        times = 0
-                        continue
-                    channel = self.get_channel(channelname)
-                    await channel.send(
-                        f".ban {user} Crossbanned, originated from {ctx.channel.name}."
-                    )
-                    print(user)
-                times += 1
+                    try:
+                        channel = self.get_channel(channelname)
+                        await asyncio.sleep(0.1)
+                        await channel.send(
+                            f".ban {user} Crossbanned, originated from {ctx.channel.name}."
+                        )
+                    except:
+                        await asyncio.sleep(30)
+
 
             await ctx.send("Massban finished :)")
 
