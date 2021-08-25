@@ -105,7 +105,7 @@ class Bot(commands.Bot):
         if ctx.author.name in config["ownernames"]:
             data = urlopen(url).read().decode("UTF-8")
             users = data.split("\n")
-            #print("UserList " + str(users))
+            # print("UserList " + str(users))
 
             for user in users:
                 user = user.strip("\r")
@@ -127,7 +127,7 @@ class Bot(commands.Bot):
         if ctx.author.name in config["ownernames"]:
             data = urlopen(url).read().decode("UTF-8")
             users = data.split("\n")
-            #print("UserList " + str(users))
+            # print("UserList " + str(users))
 
             for user in users:
                 user = user.strip("\r")
