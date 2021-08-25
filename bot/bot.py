@@ -78,8 +78,8 @@ class Bot(commands.Bot):
 
             await ctx.send("Undoban finished :)")
 
-    @limits(calls=3, period=1)
     @commands.command(name="masscrossban", aliases=["massxban", "mxban"])
+    @limits(calls=3, period=1)
     async def masscrossban_comamdn(self, ctx, users: str, *, reason: str):
         if ctx.author.name in config["ownernames"]:
             users2 = users.split(",")
@@ -92,8 +92,8 @@ class Bot(commands.Bot):
                     )
             await ctx.send("Massban finished :)")
 
-    @limits(calls=3, period=1)
     @commands.command(name="masscrossunban", aliases=["massxunban", "mxuban"])
+    @limits(calls=3, period=1)
     async def masscrossunban_comamdn(self, ctx, users: str):
         if ctx.author.name in config["ownernames"]:
             users2 = users.split(",")
@@ -104,8 +104,8 @@ class Bot(commands.Bot):
                     await channel.send(f".unban {user}")
             await ctx.send("Massunban finished :)")
 
-    @limits(calls=3, period=1)
     @commands.command(name="massfileban")
+    @limits(calls=3, period=1)
     async def masscrossban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
             data = urlopen(url).read().decode("UTF-8")
@@ -127,8 +127,8 @@ class Bot(commands.Bot):
         else:
             await ctx.send("You are not allowed to do that.")
 
-    @limits(calls=3, period=1)
     @commands.command(name="massfileunban")
+    @limits(calls=3, period=1)
     async def masscrossunban_fromfile(self, ctx, *, url: str):
         if ctx.author.name in config["ownernames"]:
             data = urlopen(url).read().decode("UTF-8")
