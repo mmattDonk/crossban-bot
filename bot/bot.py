@@ -147,6 +147,47 @@ class Bot(commands.Bot):
         else:
             await ctx.send("You are not allowed to do that.")
 
+    @commands.command(name="sc_massfileban")
+    async def massban_fromfile(self, ctx, *, url: str):
+        if ctx.author.name in config["ownernames"]:
+            data = urlopen(url).read().decode("UTF-8")
+            users = data.split("\n")
+            # print("UserList " + str(users))
+
+            for user in users:
+                user = user.strip("\r")
+                try:
+                    await asyncio.sleep(0.1)
+                    await ctx.channel.send(
+                        f".ban {user} Massbanned"
+                    )
+                except:
+                    await asyncio.sleep(30)
+
+            await ctx.send("Massban finished :)")
+
+        else:
+            await ctx.send("You are not allowed to do that.")
+
+    @commands.command(name="sc_massfileunban")
+    async def massunban_fromfile(self, ctx, *, url: str):
+        if ctx.author.name in config["ownernames"]:
+            data = urlopen(url).read().decode("UTF-8")
+            users = data.split("\n")
+            # print("UserList " + str(users))
+
+            for user in users:
+                user = user.strip("\r")
+                await asyncio.sleep(0.3)
+                channel = self.get_channel(channelname)
+                await ctx.channel.send(f".unban {user}")
+                print(user)
+
+            await ctx.send("Massunban finished :)")
+
+        else:
+            await ctx.send("You are not allowed to do that.")
+
 
 bot = Bot()
 bot.run()
