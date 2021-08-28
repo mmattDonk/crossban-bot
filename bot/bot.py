@@ -158,9 +158,7 @@ class Bot(commands.Bot):
                 user = user.strip("\r")
                 try:
                     await asyncio.sleep(0.1)
-                    await ctx.channel.send(
-                        f".ban {user} Massbanned"
-                    )
+                    await ctx.channel.send(f".ban {user} Massbanned")
                 except:
                     await asyncio.sleep(30)
 
