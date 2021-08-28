@@ -115,7 +115,7 @@ class Bot(commands.Bot):
                 for channelname in self.initial_channels:
                     try:
                         channel = self.get_channel(channelname)
-                        await asyncio.sleep(0.1)
+                        await asyncio.sleep(0.3)
                         await channel.send(
                             f".ban {user} Crossbanned, originated from {ctx.channel.name}."
                         )
@@ -157,7 +157,7 @@ class Bot(commands.Bot):
             for user in users:
                 user = user.strip("\r")
                 try:
-                    await asyncio.sleep(0.1)
+                    await asyncio.sleep(0.3)
                     await ctx.channel.send(f".ban {user} Massbanned")
                 except:
                     await asyncio.sleep(30)
