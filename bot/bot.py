@@ -179,7 +179,6 @@ class Bot(commands.Bot):
             for user in users:
                 user = user.strip("\r")
                 await asyncio.sleep(0.3)
-                channel = self.get_channel(channelname)
                 await ctx.channel.send(f".unban {user}")
                 print(user)
 
