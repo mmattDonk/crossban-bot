@@ -122,7 +122,10 @@ class Bot(commands.Bot):
                     except:
                         await asyncio.sleep(30)
 
-            await ctx.send("Massban finished :)")
+            for channelname in self.initial_channels:
+                channel = self.get_channel(channelname)
+                await asyncio.sleep(1)
+                await channel.send("Massban finished :)")
 
         else:
             await ctx.send("You are not allowed to do that.")
@@ -145,8 +148,11 @@ class Bot(commands.Bot):
                         )
                     except:
                         await asyncio.sleep(30)
-
-            await ctx.send("Massunban finished :)")
+            
+            for channelname in self.initial_channels:
+                channel = self.get_channel(channelname)
+                await asyncio.sleep(0.1)
+                await channel.send("Massunban finished :)")
 
         else:
             await ctx.send("You are not allowed to do that.")
