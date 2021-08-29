@@ -143,9 +143,7 @@ class Bot(commands.Bot):
                     try:
                         channel = self.get_channel(channelname)
                         await asyncio.sleep(0.3)
-                        await channel.send(
-                            f".unban {user}"
-                        )
+                        await channel.send(f".unban {user}")
                     except:
                         await asyncio.sleep(30)
             
