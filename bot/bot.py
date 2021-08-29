@@ -137,10 +137,14 @@ class Bot(commands.Bot):
             for user in users:
                 user = user.strip("\r")
                 for channelname in self.initial_channels:
-                    await asyncio.sleep(0.3)
-                    channel = self.get_channel(channelname)
-                    await channel.send(f".unban {user}")
-                    print(user)
+                    try:
+                        channel = self.get_channel(channelname)
+                        await asyncio.sleep(0.3)
+                        await channel.send(
+                            f".unban {user}"
+                        )
+                    except:
+                        await asyncio.sleep(30)
 
             await ctx.send("Massunban finished :)")
 
