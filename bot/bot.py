@@ -23,6 +23,7 @@ from pathlib import Path
 cwd = Path(__file__).parents[0]
 cwd = str(cwd)
 
+
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(
@@ -32,7 +33,6 @@ class Bot(commands.Bot):
             prefix=config["prefix"],
             initial_channels=config["channels"],
         )
-
 
     async def event_message(self, message):
         await self.handle_commands(message)
@@ -88,12 +88,16 @@ class Bot(commands.Bot):
             await asyncio.sleep(0.1)
             owner_channel = self.get_channel(config["ownernames"][0])
 
-            await channel_name.send(f"MrDestructoid 🔔 Crossban Bot has joined {channel}!")
+            await channel_name.send(
+                f"MrDestructoid 🔔 Crossban Bot has joined {channel}!"
+            )
             await asyncio.sleep(0.1)
             await owner_channel.send(f"@{config['ownernames'][0]}, Joined {channel}.")
 
         else:
-            await ctx.send(f"❌ You are not allowed to make Crossban_bot join another channel.")
+            await ctx.send(
+                f"❌ You are not allowed to make Crossban_bot join another channel."
+            )
 
     @commands.command(name="leave", aliases=["leavechannel"])
     async def leave_channel(self, ctx, channel: str):
@@ -107,16 +111,20 @@ class Bot(commands.Bot):
             await asyncio.sleep(0.1)
             owner_channel = self.get_channel(config["ownernames"][0])
 
-            await channel_name.send(f"MrDestructoid 🔔 Crossban Bot has left {channel} (Will leave once the bot restarts).")
+            await channel_name.send(
+                f"MrDestructoid 🔔 Crossban Bot has left {channel} (Will leave once the bot restarts)."
+            )
             await asyncio.sleep(0.1)
             await owner_channel.send(f"@{config['ownernames'][0]}, Left {channel}.")
         else:
-            await ctx.send(f"❌ You are not allowed to make Crossban_bot leave another channel.")
+            await ctx.send(
+                f"❌ You are not allowed to make Crossban_bot leave another channel."
+            )
 
     @commands.command(name="crossban", aliases=["xban"])
     async def crossban_command(self, ctx, user: str, *, reason: str):
         if ctx.author.name in config["ownernames"]:
-            for channelname in self.read_json('config')["channels"]:
+            for channelname in self.read_json("config")["channels"]:
                 await asyncio.sleep(0.2)
                 channel = self.get_channel(channelname)
                 await channel.send(
@@ -128,7 +136,7 @@ class Bot(commands.Bot):
     @commands.command(name="undoban", aliases=["xunban"])
     async def undocrossban_command(self, ctx, user: str):
         if ctx.author.name in config["ownernames"]:
-            for channelname in self.read_json('config')["channels"]:
+            for channelname in self.read_json("config")["channels"]:
                 await asyncio.sleep(0.2)
                 channel = self.get_channel(channelname)
                 await channel.send(f".unban {user}")
@@ -140,7 +148,7 @@ class Bot(commands.Bot):
         if ctx.author.name in config["ownernames"]:
             users2 = users.split(",")
             for user in users2:
-                for channelname in self.read_json('config')["channels"]:
+                for channelname in self.read_json("config")["channels"]:
                     await asyncio.sleep(0.5)
                     channel = self.get_channel(channelname)
                     await channel.send(
@@ -153,8 +161,8 @@ class Bot(commands.Bot):
         if ctx.author.name in config["ownernames"]:
             users2 = users.split(",")
             for user in users2:
-                for channelname in self.read_json('config')["channels"]:
-                    await asyncio.sleep(0.5 )
+                for channelname in self.read_json("config")["channels"]:
+                    await asyncio.sleep(0.5)
                     channel = self.get_channel(channelname)
                     await channel.send(f".unban {user}")
             await ctx.send("Massunban finished :)")
@@ -166,14 +174,14 @@ class Bot(commands.Bot):
             users = data.split("\n")
             # print("UserList " + str(users))
 
-            for channelname in self.read_json('config')["channels"]:
+            for channelname in self.read_json("config")["channels"]:
                 channel = self.get_channel(channelname)
                 await asyncio.sleep(0.1)
                 await channel.send("Massban starting!")
 
             for user in users:
                 user = user.strip("\r")
-                for channelname in self.read_json('config')["channels"]:
+                for channelname in self.read_json("config")["channels"]:
                     try:
                         await asyncio.sleep(0.3)
                         channel = self.get_channel(channelname)
@@ -183,7 +191,7 @@ class Bot(commands.Bot):
                     except:
                         await asyncio.sleep(30)
 
-            for channelname in self.read_json('config')["channels"]:
+            for channelname in self.read_json("config")["channels"]:
                 channel = self.get_channel(channelname)
                 await asyncio.sleep(0.1)
                 await channel.send("Massban finished :)")
@@ -198,14 +206,14 @@ class Bot(commands.Bot):
             users = data.split("\n")
 
             # print("UserList " + str(users))
-            for channelname in self.read_json('config')["channels"]:
+            for channelname in self.read_json("config")["channels"]:
                 await asyncio.sleep(0.1)
                 channel = self.get_channel(channelname)
                 await channel.send("Massunban starting!")
 
             for user in users:
                 user = user.strip("\r")
-                for channelname in self.read_json('config')["channels"]:
+                for channelname in self.read_json("config")["channels"]:
                     try:
                         await asyncio.sleep(0.3)
                         channel = self.get_channel(channelname)
@@ -213,7 +221,7 @@ class Bot(commands.Bot):
                     except:
                         await asyncio.sleep(30)
 
-            for channelname in self.read_json('config')["channels"]:
+            for channelname in self.read_json("config")["channels"]:
                 await asyncio.sleep(0.1)
                 channel = self.get_channel(channelname)
                 await channel.send("Massunban finished :)")
