@@ -110,6 +110,11 @@ class Bot(commands.Bot):
             users = data.split("\n")
             # print("UserList " + str(users))
 
+            for channelname in self.initial_channels:
+                channel = self.get_channel(channelname)
+                await asyncio.sleep(0.1)
+                await channel.send("Massban starting!")
+
             for user in users:
                 user = user.strip("\r")
                 for channelname in self.initial_channels:
@@ -117,14 +122,14 @@ class Bot(commands.Bot):
                         channel = self.get_channel(channelname)
                         await asyncio.sleep(0.3)
                         await channel.send(
-                            f".ban {user} Crossbanned, originated from {ctx.channel.name}."
+                            f".ban {user} | Crossbanned, originated from {ctx.channel.name}."
                         )
                     except:
                         await asyncio.sleep(30)
 
             for channelname in self.initial_channels:
                 channel = self.get_channel(channelname)
-                await asyncio.sleep(1)
+                await asyncio.sleep(0.1)
                 await channel.send("Massban finished :)")
 
         else:
@@ -135,7 +140,12 @@ class Bot(commands.Bot):
         if ctx.author.name in config["ownernames"]:
             data = urlopen(url).read().decode("UTF-8")
             users = data.split("\n")
+
             # print("UserList " + str(users))
+            for channelname in self.initial_channels:
+                channel = self.get_channel(channelname)
+                await asyncio.sleep(0.1)
+                await channel.send("Massunban starting!")
 
             for user in users:
                 user = user.strip("\r")
@@ -166,7 +176,7 @@ class Bot(commands.Bot):
                 user = user.strip("\r")
                 try:
                     await asyncio.sleep(0.3)
-                    await ctx.channel.send(f".ban {user} Massbanned")
+                    await ctx.channel.send(f".ban {user} | Massbanned")
                 except:
                     await asyncio.sleep(30)
 
