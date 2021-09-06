@@ -75,7 +75,9 @@ class Bot(commands.Bot):
                     f"MrDestructoid 🔔 Crossban Bot has joined {channel}!"
                 )
                 await asyncio.sleep(0.1)
-                await owner_channel.send(f"@{config['ownernames'][0]}, Joined {channel}.")
+                await owner_channel.send(
+                    f"@{config['ownernames'][0]}, Joined {channel}."
+                )
             else:
                 await ctx.send("Channel already in list.")
 
@@ -103,9 +105,7 @@ class Bot(commands.Bot):
                 await asyncio.sleep(0.1)
                 await owner_channel.send(f"@{config['ownernames'][0]}, Left {channel}.")
             else:
-                await ctx.send(
-                    f"❌ Crossban_bot isn't in {channel}"
-                )
+                await ctx.send(f"❌ Crossban_bot isn't in {channel}")
         else:
             await ctx.send(
                 f"❌ You are not allowed to make Crossban_bot leave another channel."
