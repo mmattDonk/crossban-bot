@@ -71,7 +71,7 @@ class Bot(commands.Bot):
         else:
             await ctx.send(f"FeelsDankMan 🔔 crossban bot online. @{ctx.author.name}")
 
-    @commands.command(name="join", aliases=["joinchannel"])
+    @commands.command(name="cbb_join", aliases=["cbb_joinchannel"])
     async def join_channel(self, ctx, channel: str):
         if ctx.author.name in config["ownernames"]:
             data = self.read_json("config")
@@ -99,7 +99,7 @@ class Bot(commands.Bot):
                 f"❌ You are not allowed to make Crossban_bot join another channel."
             )
 
-    @commands.command(name="leave", aliases=["leavechannel"])
+    @commands.command(name="cbb_leave", aliases=["cbb_leavechannel"])
     async def leave_channel(self, ctx, channel: str):
         if ctx.author.name in config["ownernames"] or ctx.author.name == channel:
             data = self.read_json("config")
