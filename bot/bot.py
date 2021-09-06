@@ -37,19 +37,6 @@ class Bot(commands.Bot):
     async def event_message(self, message):
         await self.handle_commands(message)
 
-        if config["logmode"]:
-            with open(f"logs/log_{datetime.date.today()}.txt", "a") as f:
-                f.write(
-                    "\n"
-                    + message.author.name
-                    + " - "
-                    + message.content
-                    + " ["
-                    + message.channel.name
-                    + "] "
-                    + str(datetime.datetime.utcnow())
-                )
-
     async def event_ready(self):
         print(f"Twitch Bot Ready | {self.nick}")
 
@@ -64,35 +51,33 @@ class Bot(commands.Bot):
 
     @commands.command(name="ping", aliases=["ding"])
     async def test_command(self, ctx):
-        if config["logmode"]:
-            await ctx.send(
-                f"FeelsDankMan 🔔 crossban+log bot online. @{ctx.author.name}"
-            )
-        else:
-            await ctx.send(f"FeelsDankMan 🔔 crossban bot online. @{ctx.author.name}")
+        await ctx.send(f"FeelsDankMan 🔔 crossban bot online. @{ctx.author.name}")
 
     @commands.command(name="cbb_join", aliases=["cbb_joinchannel"])
     async def join_channel(self, ctx, channel: str):
         if ctx.author.name in config["ownernames"]:
-            data = self.read_json("config")
-            data["channels"].append(channel)
-            self.write_json(data, "config")
+            if channel not in config["channels"]:
+                data = self.read_json("config")
+                data["channels"].append(channel)
+                self.write_json(data, "config")
 
-            await self.join_channels([channel])
+                await self.join_channels([channel])
 
-            print(channel)
+                print(channel)
 
-            await asyncio.sleep(0.2)
+                await asyncio.sleep(0.2)
 
-            channel_name = self.get_channel(channel)
-            await asyncio.sleep(0.1)
-            owner_channel = self.get_channel(config["ownernames"][0])
+                channel_name = self.get_channel(channel)
+                await asyncio.sleep(0.1)
+                owner_channel = self.get_channel(config["ownernames"][0])
 
-            await channel_name.send(
-                f"MrDestructoid 🔔 Crossban Bot has joined {channel}!"
-            )
-            await asyncio.sleep(0.1)
-            await owner_channel.send(f"@{config['ownernames'][0]}, Joined {channel}.")
+                await channel_name.send(
+                    f"MrDestructoid 🔔 Crossban Bot has joined {channel}!"
+                )
+                await asyncio.sleep(0.1)
+                await owner_channel.send(f"@{config['ownernames'][0]}, Joined {channel}.")
+            else:
+                await ctx.send("Channel already in list.")
 
         else:
             await ctx.send(
@@ -102,20 +87,25 @@ class Bot(commands.Bot):
     @commands.command(name="cbb_leave", aliases=["cbb_leavechannel"])
     async def leave_channel(self, ctx, channel: str):
         if ctx.author.name in config["ownernames"] or ctx.author.name == channel:
-            data = self.read_json("config")
-            data["channels"].remove(channel)
-            self.write_json(data, "config")
+            if channel in config["channels"]:
+                data = self.read_json("config")
+                data["channels"].remove(channel)
+                self.write_json(data, "config")
 
-            # await self.leave_channels([channel])
-            channel_name = self.get_channel(channel)
-            await asyncio.sleep(0.1)
-            owner_channel = self.get_channel(config["ownernames"][0])
+                # await self.leave_channels([channel])
+                channel_name = self.get_channel(channel)
+                await asyncio.sleep(0.1)
+                owner_channel = self.get_channel(config["ownernames"][0])
 
-            await channel_name.send(
-                f"MrDestructoid 🔔 Crossban Bot has left {channel} (Will leave once the bot restarts)."
-            )
-            await asyncio.sleep(0.1)
-            await owner_channel.send(f"@{config['ownernames'][0]}, Left {channel}.")
+                await channel_name.send(
+                    f"MrDestructoid 🔔 Crossban Bot has left {channel} (Will leave once the bot restarts)."
+                )
+                await asyncio.sleep(0.1)
+                await owner_channel.send(f"@{config['ownernames'][0]}, Left {channel}.")
+            else:
+                await ctx.send(
+                    f"❌ Crossban_bot isn't in {channel}"
+                )
         else:
             await ctx.send(
                 f"❌ You are not allowed to make Crossban_bot leave another channel."

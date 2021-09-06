@@ -29,14 +29,11 @@ client_id=twitchdevconsoleclientid
 ```
 **Make sure .env and config.json are in the bot folder**
 
-3. Make a "logs" folder inside of the `bot` folder (if you have logging enabled)
+3. Install requirements `python3 -m pip install -U -r bot/requirements.txt`
 
-4. Install requirements `python3 -m pip install -U -r bot/requirements.txt`
+4. Start bot `python3 bot/bot.py`
 
-5. Start bot `python3 bot/bot.py`
-
-(Or you can skin steps 4 and 5 by using Docker `docker-compose up --build`
-Note: You won't be able to see logs.)
+(Or you can skin steps 4 and 5 by using Docker `docker-compose up --build`)
 
 ## Commands
 ### All commands that are bolded, are `OWNER ONLY` (which means only the bot owners can use them)
