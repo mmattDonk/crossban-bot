@@ -199,7 +199,7 @@ class Bot(commands.Bot):
             for channelname in self.read_json("config")["channels"]:
                 await asyncio.sleep(0.1)
                 channel = self.get_channel(channelname)
-                await channel.send("Massunban starting!")
+                await channel.send("Massunban starting! (This is usually for false positives)")
 
             for user in users:
                 user = user.strip("\r")
