@@ -179,7 +179,7 @@ class Bot(commands.Bot):
                             f".ban {user} | Crossbanned, originated from {ctx.channel.name}."
                         )
                     except:
-                        await asyncio.sleep(2)
+                        await asyncio.sleep(15)
 
             for channelname in self.read_json("config")["channels"]:
                 channel = self.get_channel(channelname)
@@ -211,7 +211,7 @@ class Bot(commands.Bot):
                         channel = self.get_channel(channelname)
                         await channel.send(f".unban {user}")
                     except:
-                        await asyncio.sleep(2)
+                        await asyncio.sleep(15)
 
             for channelname in self.read_json("config")["channels"]:
                 await asyncio.sleep(0.1)
@@ -234,7 +234,7 @@ class Bot(commands.Bot):
                     await asyncio.sleep(0.3)
                     await ctx.channel.send(f".ban {user} | Massbanned")
                 except:
-                    await asyncio.sleep(2)
+                    await asyncio.sleep(15)
 
             await ctx.send("Massban finished :)")
 
