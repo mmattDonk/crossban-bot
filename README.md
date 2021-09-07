@@ -40,6 +40,7 @@ Note: You won't be able to see logs.)
 
 ## Commands
 ### All commands that are bolded, are `OWNER ONLY` (which means only the bot owners can use them)
+### Commands that are in italics, are `MODERATOR ONLY` (which means only moderators can use them)
 
 **!crossban {username} {reason}**
 
@@ -49,5 +50,12 @@ Note: You won't be able to see logs.)
 
 **!masscrossunban {username},{username1},{username2},{username3}**
 
+**!massfileban {github raw link}**
+
+**!massfileunban {github raw link}**
+
+*!sc_massfileban {github raw link}* (same thing as the massfileban except its only in 1 channel)
+
+*!sc_massfileunban {github raw link}* (same thing as the massfileban except its only in 1 channel)
 
 ### `🙌` Code Contributors
