@@ -50,6 +50,7 @@ class Bot(commands.Bot):
             json.dump(data, file, indent=4)
 
     @commands.command(name="ping", aliases=["ding"])
+    @commands.cooldown(1, 5, commands.cooldowns.Bucket(2))
     async def test_command(self, ctx):
         await ctx.send(f"FeelsDankMan 🔔 crossban bot online. @{ctx.author.name}")
 
