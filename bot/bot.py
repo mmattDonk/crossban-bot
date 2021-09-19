@@ -56,7 +56,7 @@ class Bot(commands.Bot):
 
     @commands.command(name="spam")
     async def spam_command(self, ctx, time: int, *, message: str):
-        if ctx.author.is_mod:
+        if ctx.author.is_mod or ctx.author.name in config["ownernames"]:
             for _ in range(time):
                 await ctx.send(message)
                 print(time)
