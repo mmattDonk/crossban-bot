@@ -54,13 +54,6 @@ class Bot(commands.Bot):
     async def test_command(self, ctx):
         await ctx.send(f"FeelsDankMan 🔔 crossban bot online. @{ctx.author.name}")
 
-    @commands.command(name="spam")
-    async def spam_command(self, ctx, time: int, *, message: str):
-        if ctx.author.is_mod or ctx.author.name in config["ownernames"]:
-            for _ in range(time):
-                await ctx.send(message)
-                print(time)
-
     @commands.command(name="cbb_join", aliases=["cbb_joinchannel"])
     async def join_channel(self, ctx, channel: str):
         if ctx.author.name in config["ownernames"]:
