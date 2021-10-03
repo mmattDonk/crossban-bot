@@ -53,7 +53,9 @@ class Bot(commands.Bot):
     @commands.command(name="ping", aliases=["ding"])
     @commands.cooldown(1, 5, commands.cooldowns.Bucket(2))
     async def test_command(self, ctx):
-        await ctx.send(f"FeelsDankMan 🔔 crossban bot online on commit {subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']).decode('ascii').strip()} @{ctx.author.name}")
+        await ctx.send(
+            f"FeelsDankMan 🔔 crossban bot online on commit {subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']).decode('ascii').strip()} @{ctx.author.name}"
+        )
 
     @commands.command(name="cbb_join", aliases=["cbb_joinchannel"])
     async def join_channel(self, ctx, channel: str):
