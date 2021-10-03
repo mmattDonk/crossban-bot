@@ -47,4 +47,4 @@ client_id=twitchdevconsoleclientid
 **!masscrossunban {username},{username1},{username2},{username3}**
 
 
-### `🙌` Code Contributors
+### 🙌 Code Contributors
