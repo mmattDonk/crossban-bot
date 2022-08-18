@@ -1,23 +1,17 @@
 import asyncio
-import subprocess
-from twitchio.errors import TwitchIOException
-from twitchio.ext import commands
-
-import os
-
-import dotenv
-
 import json
+import os
+import subprocess
 from urllib.request import urlopen
 
-from twitchio.ext.commands.errors import TwitchCommandError
+import dotenv
+from twitchio.ext import commands
 
 with open("bot/config.json") as config_file:
     config = json.load(config_file)
 
 dotenv.load_dotenv()
 
-import datetime
 
 from pathlib import Path
 
@@ -39,7 +33,7 @@ class Bot(commands.Bot):
         await self.handle_commands(message)
 
     async def event_ready(self):
-        print(f"Twitch Bot Ready | {self.nick}")
+        print(f"Crossban Bot Ready | Logged in as: {self.nick}")
 
     def read_json(self, filename):
         with open(f"{cwd}/{filename}.json", "r") as file:
@@ -86,9 +80,7 @@ class Bot(commands.Bot):
                 await ctx.send("Channel already in list.")
 
         else:
-            await ctx.send(
-                f"❌ You are not allowed to make Crossban_bot join another channel."
-            )
+            await ctx.send("❌ You are not allowed to make Crossban_bot join another channel.")
 
     @commands.command(name="cbb_leave", aliases=["cbb_leavechannel"])
     async def leave_channel(self, ctx, channel: str):
@@ -97,23 +89,18 @@ class Bot(commands.Bot):
                 data = self.read_json("config")
                 data["channels"].remove(channel)
                 self.write_json(data, "config")
-
-                # await self.leave_channels([channel])
                 channel_name = self.get_channel(channel)
                 await asyncio.sleep(0.1)
                 owner_channel = self.get_channel(config["ownernames"][0])
+                await channel_name.send(f"MrDestructoid 🔔 Crossban Bot has left {channel}")
+                await self.part_channels([channel_name])
 
-                await channel_name.send(
-                    f"MrDestructoid 🔔 Crossban Bot has left {channel} (Will leave once the bot restarts)."
-                )
                 await asyncio.sleep(0.1)
                 await owner_channel.send(f"@{config['ownernames'][0]}, Left {channel}.")
             else:
                 await ctx.send(f"❌ Crossban_bot isn't in {channel}")
         else:
-            await ctx.send(
-                f"❌ You are not allowed to make Crossban_bot leave another channel."
-            )
+            await ctx.send("❌ You are not allowed to make Crossban_bot leave another channel.")
 
     @commands.command(name="crossban", aliases=["xban"])
     async def crossban_command(self, ctx, user: str, *, reason: str):
