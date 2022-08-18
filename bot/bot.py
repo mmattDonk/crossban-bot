@@ -80,7 +80,9 @@ class Bot(commands.Bot):
                 await ctx.send("Channel already in list.")
 
         else:
-            await ctx.send("❌ You are not allowed to make Crossban_bot join another channel.")
+            await ctx.send(
+                "❌ You are not allowed to make Crossban_bot join another channel."
+            )
 
     @commands.command(name="cbb_leave", aliases=["cbb_leavechannel"])
     async def leave_channel(self, ctx, channel: str):
@@ -92,7 +94,9 @@ class Bot(commands.Bot):
                 channel_name = self.get_channel(channel)
                 await asyncio.sleep(0.1)
                 owner_channel = self.get_channel(config["ownernames"][0])
-                await channel_name.send(f"MrDestructoid 🔔 Crossban Bot has left {channel}")
+                await channel_name.send(
+                    f"MrDestructoid 🔔 Crossban Bot has left {channel}"
+                )
                 await self.part_channels([channel_name])
 
                 await asyncio.sleep(0.1)
@@ -100,7 +104,9 @@ class Bot(commands.Bot):
             else:
                 await ctx.send(f"❌ Crossban_bot isn't in {channel}")
         else:
-            await ctx.send("❌ You are not allowed to make Crossban_bot leave another channel.")
+            await ctx.send(
+                "❌ You are not allowed to make Crossban_bot leave another channel."
+            )
 
     @commands.command(name="crossban", aliases=["xban"])
     async def crossban_command(self, ctx, user: str, *, reason: str):
